@@ -1,15 +1,15 @@
 on: [push]
 
 jobs:
-  hello_world_job:
+  gather_stats_job:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: A job to display repo stats
     steps:
-      - name: Hello world action step
-        id: hello
-        uses: AndreiLobanovich/actions_test_task@v1.1
+      - name: Display stats
+        id: stats
+        uses: AndreiLobanovich/actions_test_task@v1.2
         with:
-          who-to-greet: 'Mona the Octocat'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          owner: "AndreiLobanovich"
+          repo: "actions_test_task"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

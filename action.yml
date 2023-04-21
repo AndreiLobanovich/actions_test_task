@@ -1,14 +1,14 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: "Gather statistics"
+description: "Gathers repository statistics"
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  owner:
+    description: "Repository owner name"
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+    default: "AndreiLobanovich"
+  repository:
+    description: "Repository name"
+    required: true
+    default: "actions_test_task"
 runs:
-  using: 'node16'
-  main: 'dist/index.js'
-  
+  using: "node16"
+  main: ".github/actions/index.js"
