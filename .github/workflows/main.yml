@@ -11,7 +11,7 @@ jobs:
         id: stats
         uses: AndreiLobanovich/actions_test_task@v1.3
         with:
-          owner: "AndreiLobanovich"
-          repository: "actions_test_task"
+          owner: "Vision-CAIR"
+          repository: "MiniGPT-4"
         env:
           GITHUB_TOKEN: ${{ secrets.TEST_TASK_TOKEN }}
