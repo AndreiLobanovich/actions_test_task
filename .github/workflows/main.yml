@@ -10,6 +10,6 @@ jobs:
         uses: AndreiLobanovich/actions_test_task@v1.2
         with:
           owner: "AndreiLobanovich"
-          repo: "actions_test_task"
+          repository: "actions_test_task"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
