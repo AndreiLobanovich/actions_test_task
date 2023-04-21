@@ -20,8 +20,8 @@ try {
     auth: token
   })
   const sinceParam = new Date(new Date().setMonth(new Date().getMonth() - 1));
-  const owner = _actions_core__WEBPACK_IMPORTED_MODULE_0__.core.getInput("owner");
-  const repo = _actions_core__WEBPACK_IMPORTED_MODULE_0__.core.getInput("repository");
+  const owner = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("owner");
+  const repo = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("repository");
   const [issues, pullRequests] = await Promise.all([
     octokit.rest.issues.listForRepo({ owner, repo, since: sinceParam }),
     octokit.rest.pulls.list({ owner, repo, state: 'all', sort: 'created', direction: 'desc', since: sinceParam.toISOString() }),
@@ -40,7 +40,7 @@ try {
   console.log(`Closed issues: ${closedIssues.length}`);
 
 } catch (error) {
-  _actions_core__WEBPACK_IMPORTED_MODULE_0__.core.setFailed(error.message);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message);
 }
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } }, 1);
