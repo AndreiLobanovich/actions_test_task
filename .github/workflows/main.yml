@@ -12,4 +12,4 @@ jobs:
           owner: "AndreiLobanovich"
           repository: "actions_test_task"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TEST_TASK_TOKEN }}
