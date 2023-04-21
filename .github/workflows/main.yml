@@ -1,4 +1,6 @@
-on: [push]
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
   gather_stats_job:
