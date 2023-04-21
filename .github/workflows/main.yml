@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Display stats
         id: stats
-        uses: AndreiLobanovich/actions_test_task@v1.2
+        uses: AndreiLobanovich/actions_test_task@v1.3
         with:
           owner: "AndreiLobanovich"
           repository: "actions_test_task"
