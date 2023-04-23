@@ -66634,7 +66634,7 @@ try {
   const owner = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("owner");
   const repo = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("repository");
   const dateSince = parseInt(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("dateSince"));
-  const sinceParam = timeAgo ? new Date(dateSince) : (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.subMonths)(new Date(), 1);
+  const sinceParam = dateSince ? new Date(dateSince) : (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.subMonths)(new Date(), 1);
   const [issues, pullRequests] = await Promise.all([
     octokit.rest.issues.listForRepo({ owner, repo, since: sinceParam }),
     octokit.rest.pulls.list({ owner, repo, state: 'all', sort: 'created', direction: 'desc', since: sinceParam.toISOString() }),

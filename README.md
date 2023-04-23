@@ -24,7 +24,7 @@ env:
 ## Inputs
 - owner - Repository owner name (required)
 - repository - Repository name (required)
-- dateSince - Date since which statistics should be gathered (optional)
+- dateSince - Date since which statistics should be gathered - if not specified gets data one month old (optional)
 
 ## Outputs
 - totalPrs - Total number of PRs
