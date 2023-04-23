@@ -1,57 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 23665:
-/***/ ((module, __webpack_exports__, __nccwpck_require__) => {
-
-"use strict";
-__nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
-__nccwpck_require__.r(__webpack_exports__);
-/* harmony import */ var octokit__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(55709);
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(44602);
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__nccwpck_require__.n(date_fns__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(54695);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
-
-
-
-
-
-try {
-  const token = process.env.GITHUB_TOKEN;
-  const octokit = new octokit__WEBPACK_IMPORTED_MODULE_1__/* .Octokit */ .vd({
-    auth: token
-  })
-  const owner = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("owner");
-  const repo = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("repository");
-  const timeAgo = parseInt(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("monthsAgo"));
-  const sinceParam = timeAgo ? (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.subMonths)(new Date(), timeAgo)
-    : (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.subMonths)(new Date(), 1);
-  const [issues, pullRequests] = await Promise.all([
-    octokit.rest.issues.listForRepo({ owner, repo, since: sinceParam }),
-    octokit.rest.pulls.list({ owner, repo, state: 'all', sort: 'created', direction: 'desc', since: sinceParam.toISOString() }),
-  ]);
-
-  const openIssues = issues.data.filter(issue => !issue.pull_request && issue.state === 'open');
-  const closedIssues = issues.data.filter(issue => !issue.pull_request && issue.state === 'closed');
-  const openPRs = pullRequests.data.filter(pr => pr.state === 'open');
-  const closedPRs = pullRequests.data.filter(pr => pr.state === 'closed');
-
-  console.log(`Total PRs: ${pullRequests.data.length}`);
-  console.log(`Open PRs: ${openPRs.length}`);
-  console.log(`Closed PRs: ${closedPRs.length}`);
-  console.log(`Total issues: ${issues.data.length}`);
-  console.log(`Open issues: ${openIssues.length}`);
-  console.log(`Closed issues: ${closedIssues.length}`);
-
-} catch (error) {
-  _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message);
-}
-__webpack_async_result__();
-} catch(e) { __webpack_async_result__(e); } }, 1);
-
-/***/ }),
-
 /***/ 54207:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -66661,6 +66610,56 @@ try {
 
 /***/ }),
 
+/***/ 96003:
+/***/ ((module, __webpack_exports__, __nccwpck_require__) => {
+
+"use strict";
+__nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+__nccwpck_require__.r(__webpack_exports__);
+/* harmony import */ var octokit__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(55709);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(44602);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__nccwpck_require__.n(date_fns__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(54695);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
+
+
+
+
+
+try {
+  const token = process.env.GITHUB_TOKEN;
+  const octokit = new octokit__WEBPACK_IMPORTED_MODULE_1__/* .Octokit */ .vd({
+    auth: token
+  })
+  const owner = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("owner");
+  const repo = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("repository");
+  const timeAgo = parseInt(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("monthsAgo"));
+  const sinceParam = timeAgo ? (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.subMonths)(new Date(), timeAgo) : (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.subMonths)(new Date(), 1);
+  const [issues, pullRequests] = await Promise.all([
+    octokit.rest.issues.listForRepo({ owner, repo, since: sinceParam }),
+    octokit.rest.pulls.list({ owner, repo, state: 'all', sort: 'created', direction: 'desc', since: sinceParam.toISOString() }),
+  ]);
+
+  const openIssues = issues.data.filter(issue => !issue.pull_request && issue.state === 'open');
+  const closedIssues = issues.data.filter(issue => !issue.pull_request && issue.state === 'closed');
+  const openPRs = pullRequests.data.filter(pr => pr.state === 'open');
+  const closedPRs = pullRequests.data.filter(pr => pr.state === 'closed');
+
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Total PRs: ${pullRequests.data.length}`);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Open PRs: ${openPRs.length}`);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Closed PRs: ${closedPRs.length}`);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Total issues: ${issues.data.length}`);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Open issues: ${openIssues.length}`);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Closed issues: ${closedIssues.length}`);
+
+} catch (error) {
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message);
+}
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } }, 1);
+
+/***/ }),
+
 /***/ 21135:
 /***/ ((module) => {
 
@@ -66968,7 +66967,7 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module used 'module' so it can't be inlined
-/******/ 	var __webpack_exports__ = __nccwpck_require__(23665);
+/******/ 	var __webpack_exports__ = __nccwpck_require__(96003);
 /******/ 	module.exports = __webpack_exports__;
 /******/ 	
 /******/ })()
