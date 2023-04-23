@@ -13,6 +13,6 @@ jobs:
         with:
           owner: "Vision-CAIR"
           repository: "MiniGPT-4"
-          monthsAgo: "1"
+          dateSince: "01-12-2022"
         env:
           GITHUB_TOKEN: ${{ secrets.TEST_TASK_TOKEN }}

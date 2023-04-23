@@ -9,8 +9,8 @@ inputs:
     description: "Repository name"
     required: true
     default: "actions_test_task"
-  monthsAgo:
-    description: "How long ago in months since now shoul statistics be gathered"
+  dateSince:
+    description: "Date since which statistics should be gathered"
     required: false
 outputs:
   totalPrs:
