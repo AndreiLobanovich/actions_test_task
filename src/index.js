@@ -23,11 +23,22 @@ try {
   const closedPRs = pullRequests.data.filter(pr => pr.state === 'closed');
 
   core.info(`Total PRs: ${pullRequests.data.length}`);
+  core.setOutput('totalPrs', pullRequests.data.length);
+
   core.info(`Open PRs: ${openPRs.length}`);
+  core.setOutput('openPrs', openPRs.length);
+
   core.info(`Closed PRs: ${closedPRs.length}`);
+  core.setOutput('closedPrs', closedPRs.length);
+
   core.info(`Total issues: ${issues.data.length}`);
+  core.setOutput('totalIssues', issues.data.length);
+
   core.info(`Open issues: ${openIssues.length}`);
+  core.setOutput('openIssues', openIssues.length);
+
   core.info(`Closed issues: ${closedIssues.length}`);
+  core.setOutput('closedIssues', closedIssues.length);
 
 } catch (error) {
   core.setFailed(error.message);

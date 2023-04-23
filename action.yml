@@ -12,6 +12,19 @@ inputs:
   monthsAgo:
     description: "How long ago in months since now shoul statistics be gathered"
     required: false
+outputs:
+  totalPrs:
+    description: "Total number of PRs"
+  openPrs:
+    description: "Number of opened PRs"
+  closedPrs:
+    description: "Number of closed PRs"
+  totalIssues:
+    description: "Total number of issues"
+  openIssues:
+    description: "Number of open issues"
+  closedIssues:
+    description: "Number of closed issues"
 runs:
   using: "node16"
   main: "index.js"
