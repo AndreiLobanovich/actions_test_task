@@ -21,10 +21,18 @@ env:
   GITHUB_TOKEN: ${{ secrets.YOUR_TOKEN_NAME }}
 ```
 
-## Variables
+## Inputs
 - owner - Repository owner name (required)
 - repository - Repository name (required)
 - monthsAgo - How long ago in months since now shoul statistics be gathered (optional)
+
+## Outputs
+- totalPrs - Total number of PRs
+- openPrs - Number of opened PRs
+- closedPrs - Number of closed PRs
+- totalIssues - Total number of issues
+- openIssues - Number of open issues
+- closedIssues - Number of closed issues
 
 ## Working on action
 To change/add functionality:
