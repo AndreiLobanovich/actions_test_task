@@ -10,7 +10,7 @@ try {
   })
   const owner = core.getInput("owner");
   const repo = core.getInput("repository");
-  const dateSince = parseInt(core.getInput("dateSince"));
+  const dateSince = core.getInput("dateSince");
   const sinceParam = dateSince ? new Date(dateSince) : subMonths(new Date(), 1);
   const [issues, pullRequests] = await Promise.all([
     octokit.rest.issues.listForRepo({ owner, repo, since: sinceParam }),
