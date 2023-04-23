@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Display stats
         id: stats
-        uses: AndreiLobanovich/actions_test_task@v1.4
+        uses: AndreiLobanovich/actions_test_task@v1.4.1
         with:
           owner: "Vision-CAIR"
           repository: "MiniGPT-4"
