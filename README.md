@@ -14,7 +14,7 @@ Action gathers the following data from designated repository:
 
 To set up the action:
 1.  [Create PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
-2.  [Sotre PAT in repository secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository)
+2.  [Store PAT in repository secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository)
 3.  Use your PAT in the workflow by adding
 ```yaml
 env:
