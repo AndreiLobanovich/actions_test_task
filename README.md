@@ -12,4 +12,21 @@ Action gathers the following data from designated repository:
 
 ## Installation
 
-To set up the action - 
+To set up the action:
+1.  [Create PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+2.  [Sotre PAT in repository secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository)
+3.  Use your PAT in the workflow by adding
+```yaml
+env:
+  GITHUB_TOKEN: ${{ secrets.YOUR_TOKEN_NAME }}
+```
+
+## Working on action
+To change/add functionality:
+1. Edit src/index.js
+2. Run 
+```sh
+ncc build src/index.js
+```
+3. Replace index.js in root folder with the one generated in dist folder
+4. Remove dist folder
