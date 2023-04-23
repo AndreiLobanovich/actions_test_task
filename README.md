@@ -21,6 +21,11 @@ env:
   GITHUB_TOKEN: ${{ secrets.YOUR_TOKEN_NAME }}
 ```
 
+## Variables
+owner - Repository owner name (required)
+repository - Repository name (required)
+monthsAgo - How long ago in months since now shoul statistics be gathered (optional)
+
 ## Working on action
 To change/add functionality:
 1. Edit src/index.js
