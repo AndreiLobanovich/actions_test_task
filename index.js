@@ -66635,18 +66635,28 @@ try {
   const repo = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("repository");
   const dateSince = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("dateSince");
   const sinceParam = dateSince ? new Date(dateSince) : (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.subMonths)(new Date(), 1);
-  const [issues, pullRequests] = await Promise.all([
-    octokit.rest.issues.listForRepo({ owner, repo, since: sinceParam }),
-    octokit.rest.pulls.list({ owner, repo, state: 'all', sort: 'created', direction: 'desc', since: sinceParam.toISOString() }),
-  ]);
 
-  const openIssues = issues.data.filter(issue => !issue.pull_request && issue.state === 'open');
-  const closedIssues = issues.data.filter(issue => !issue.pull_request && issue.state === 'closed');
-  const openPRs = pullRequests.data.filter(pr => pr.state === 'open');
-  const closedPRs = pullRequests.data.filter(pr => pr.state === 'closed');
+  const issuesAndPRs = await octokit.paginate(
+    octokit.rest.issues.listForRepo,
+    {
+      owner: owner,
+      repo: repo,
+      state: "all",
+      per_page: 100
+    }
+  );
 
-  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Total PRs: ${pullRequests.data.length}`);
-  _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('totalPrs', pullRequests.data.length);
+  const pullRequests = issuesAndPRs.filter(item => item.pull_request !== undefined);
+  const issues = issuesAndPRs.filter(item => item.pull_request === undefined)
+
+  const openIssues = issues.filter(issue => !issue.pull_request && issue.state === 'open' && new Date(issue.created_at) > sinceParam);
+  const closedIssues = issues.filter(issue => !issue.pull_request && issue.state === 'closed' && new Date(issue.closed_at) > sinceParam);
+
+  const openPRs = pullRequests.filter(pr => pr.state === 'open' && new Date(pr.created_at) > sinceParam);
+  const closedPRs = pullRequests.filter(pr => pr.state === 'closed' && new Date(pr.closed_at) > sinceParam);
+
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Total PRs: ${pullRequests.length}`);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('totalPrs', pullRequests.length);
 
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Open PRs: ${openPRs.length}`);
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('openPrs', openPRs.length);
@@ -66654,8 +66664,8 @@ try {
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Closed PRs: ${closedPRs.length}`);
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('closedPrs', closedPRs.length);
 
-  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Total issues: ${issues.data.length}`);
-  _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('totalIssues', issues.data.length);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Total issues: ${issues.length}`);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('totalIssues', issues.length);
 
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Open issues: ${openIssues.length}`);
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('openIssues', openIssues.length);
