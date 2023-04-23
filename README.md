@@ -22,9 +22,9 @@ env:
 ```
 
 ## Variables
-owner - Repository owner name (required)
-repository - Repository name (required)
-monthsAgo - How long ago in months since now shoul statistics be gathered (optional)
+- owner - Repository owner name (required)
+- repository - Repository name (required)
+- monthsAgo - How long ago in months since now shoul statistics be gathered (optional)
 
 ## Working on action
 To change/add functionality:
