@@ -1,4 +1,5 @@
 import { Octokit } from 'octokit';
+import { subMonths } from 'date-fns';
 import * as core from '@actions/core';
 
 
@@ -7,9 +8,11 @@ try {
   const octokit = new Octokit({
     auth: token
   })
-  const sinceParam = new Date(new Date().setMonth(new Date().getMonth() - 1));
   const owner = core.getInput("owner");
   const repo = core.getInput("repository");
+  const timeAgo = parseInt(core.getInput("monthsAgo"));
+  const sinceParam = timeAgo ? subMonths(new Date(), timeAgo)
+    : subMonths(new Date(), 1);
   const [issues, pullRequests] = await Promise.all([
     octokit.rest.issues.listForRepo({ owner, repo, since: sinceParam }),
     octokit.rest.pulls.list({ owner, repo, state: 'all', sort: 'created', direction: 'desc', since: sinceParam.toISOString() }),
