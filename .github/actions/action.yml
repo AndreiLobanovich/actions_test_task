@@ -11,7 +11,7 @@ inputs:
     default: "actions_test_task"
   monthsAgo:
     description: "How long ago in months since now shoul statistics be gathered"
-    required: false
+    required: true
     default: "1"
 runs:
   using: "node16"
