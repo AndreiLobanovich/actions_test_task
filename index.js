@@ -66633,8 +66633,8 @@ try {
   })
   const owner = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("owner");
   const repo = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("repository");
-  const timeAgo = parseInt(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("monthsAgo"));
-  const sinceParam = timeAgo ? (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.subMonths)(new Date(), timeAgo) : (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.subMonths)(new Date(), 1);
+  const dateSince = parseInt(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("dateSince"));
+  const sinceParam = timeAgo ? new Date(dateSince) : (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.subMonths)(new Date(), 1);
   const [issues, pullRequests] = await Promise.all([
     octokit.rest.issues.listForRepo({ owner, repo, since: sinceParam }),
     octokit.rest.pulls.list({ owner, repo, state: 'all', sort: 'created', direction: 'desc', since: sinceParam.toISOString() }),
@@ -66646,11 +66646,22 @@ try {
   const closedPRs = pullRequests.data.filter(pr => pr.state === 'closed');
 
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Total PRs: ${pullRequests.data.length}`);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('totalPrs', pullRequests.data.length);
+
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Open PRs: ${openPRs.length}`);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('openPrs', openPRs.length);
+
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Closed PRs: ${closedPRs.length}`);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('closedPrs', closedPRs.length);
+
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Total issues: ${issues.data.length}`);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('totalIssues', issues.data.length);
+
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Open issues: ${openIssues.length}`);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('openIssues', openIssues.length);
+
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Closed issues: ${closedIssues.length}`);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('closedIssues', closedIssues.length);
 
 } catch (error) {
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message);
