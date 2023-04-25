@@ -39,7 +39,7 @@ To change/add functionality:
 1. Edit src/index.js
 2. Run 
 ```sh
-ncc build src/index.js
+ncc build src/index.ts -o .
 ```
 3. Replace index.js in root folder with the one generated in dist folder
 4. Remove dist folder
