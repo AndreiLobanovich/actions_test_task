@@ -1,6 +1,7 @@
 import { Octokit } from 'octokit';
 import { subMonths } from 'date-fns';
 import * as core from '@actions/core';
+import { State } from './types/enums'
 
 const main = async (): Promise<void> => {
   try {

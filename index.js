@@ -66650,6 +66650,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const octokit_1 = __nccwpck_require__(55709);
 const date_fns_1 = __nccwpck_require__(44602);
 const core = __importStar(__nccwpck_require__(54695));
+const enums_1 = __nccwpck_require__(50361);
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const token = process.env.GITHUB_TOKEN;
@@ -66671,10 +66672,10 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         });
         const pullRequests = issuesAndPRs.filter(item => item.pull_request !== undefined);
         const issues = issuesAndPRs.filter(item => item.pull_request === undefined);
-        const openIssues = issues.filter(issue => issue.state === State.Open && new Date(issue.created_at) > sinceParam);
-        const closedIssues = issues.filter(issue => issue.state === State.Closed && new Date(issue.closed_at) > sinceParam);
-        const openPRs = pullRequests.filter(pr => pr.state === State.Open && new Date(pr.created_at) > sinceParam);
-        const closedPRs = pullRequests.filter(pr => pr.state === State.Closed && new Date(pr.closed_at) > sinceParam);
+        const openIssues = issues.filter(issue => issue.state === enums_1.State.Open && new Date(issue.created_at) > sinceParam);
+        const closedIssues = issues.filter(issue => issue.state === enums_1.State.Closed && new Date(issue.closed_at) > sinceParam);
+        const openPRs = pullRequests.filter(pr => pr.state === enums_1.State.Open && new Date(pr.created_at) > sinceParam);
+        const closedPRs = pullRequests.filter(pr => pr.state === enums_1.State.Closed && new Date(pr.closed_at) > sinceParam);
         core.info(`Total PRs: ${pullRequests.length}`);
         core.setOutput('totalPrs', pullRequests.length);
         core.info(`Open PRs: ${openPRs.length}`);
@@ -66693,6 +66694,22 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 main();
+
+
+/***/ }),
+
+/***/ 50361:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.State = void 0;
+var State;
+(function (State) {
+    State["Open"] = "open";
+    State["Closed"] = "closed";
+})(State = exports.State || (exports.State = {}));
 
 
 /***/ }),
